@@ -3,17 +3,25 @@
   <h3>Here is your grid:</h3>
 
   <% @grid.each do |letter| %>
-  <%= letter %>
+    <%= letter %>
   <% end %>
 </div>
 
 <div class="text-center" id= "form">
 
-  <form action="/score" method='get'>
+  <!-- <form action="/score" method='get'>
     <label for="question">Give me a word!</label>
     <input type="text" id="answer" name="attempt" placeholder="">
-    <input name="grid" type="hidden" value="<%= @grid %>"</input>
+    <input name="grid" type="hidden" value="<%#= @grid %>"</input>
     <input class='btn btn-danger' type="submit" value="Go on!">
-  </form>
+  </form> -->
+
+  <%= form_tag('/score', method: :get) do %>
+    <label for="question">Give me a word!</label>
+    <input type="text" id="answer" name="attempt" placeholder="">
+    <input name="grid" type="hidden" value="<%= @grid %>"></input>
+    <input name="time" type="hidden" value="<%= @start_time %>"></input>
+    <input class='btn btn-danger' type="submit" value="Go on!">
+  <% end %>
 
 </div>

@@ -4,14 +4,15 @@ class PagesController < ApplicationController
   
   def game
     @grid = generate_grid(9)
-    @start_time = (Time.now)
+    @start_time = Time.now
   end
 
   def score
-    @attempt = params[:attempt]
-    @grid = params[:grid]
-  # @start_time = Date.parse params[:time]
-  # @end_time = Time.now
+    @word = params[:attempt]
+    @grid = params[:grid].chars
+    @time_spent = Time.now - Time.parse(params[:time])
+    game = GameService.new(word: @word, grid: @grid)
+    game.included?(@word, @grid)
   end
 
   def generate_grid(grid_size)
