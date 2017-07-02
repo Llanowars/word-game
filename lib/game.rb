@@ -6,7 +6,6 @@ def generate_grid(grid_size)
   rand_letters = []
   grid_size.times do
     rand_letters << ('A'..'Z').to_a[rand(26)]
-    # essayer de mettre plus de voyelle dans le grid !
   end
   rand_letters
 end
