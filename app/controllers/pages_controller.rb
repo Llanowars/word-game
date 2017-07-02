@@ -9,11 +9,11 @@ class PagesController < ApplicationController
 
   def score
     @word = params[:attempt]
-    @grid = params[:grid].chars
-    @time_spent = Time.now - Time.parse(params[:time])
-    game = GameService.new(word: @word, grid: @grid)
-    game.included?(@word, @grid)
-  end
+    @grid = params[:grid].gsub(/\W/, "").split("")
+    @start_time = Time.parse(params[:time])
+    @end_time = Time.now
+    @result = run_game(@word, @grid, @start_time, @end_time)
+  end 
 
   def generate_grid(grid_size)
     Array.new(grid_size) { ('A'..'Z').to_a[rand(26)] }
